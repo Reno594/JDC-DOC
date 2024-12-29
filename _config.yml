@@ -1,0 +1,8 @@
+title: JDC-DOC
+description: >- # Este es el texto que aparecerá en el encabezado de tu sitio web
+  Documentación del proyecto JDC-DOC
+baseurl: "" # el subpath de tu sitio, e.g. /blog
+url: "https://reno594.github.io" # la URL base de tu sitio
+
+# Build settings
+markdown: kramdown
