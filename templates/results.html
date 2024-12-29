@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Proyecto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container h2 {
+            text-align: left;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .form-column {
+            flex: 1;
+            margin: 10px;
+        }
+        .form-column label {
+            display: block;
+            margin-bottom: 6px;
+        }
+        .form-column input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            display: block;
+            width: 14%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .form-container .btn-return {
+            background-color: #FF6347; /* Tomate */
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container .btn-return:hover {
+            background-color: #FF4500; /* Rojo Naranja */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Resultados del Proyecto</h2>
+        <div class="form-row">
+            <div class="form-column">
+                <label for="field1">Largo de la Cámara en (m):</label>
+                <input type="text" id="field1" name="field1" value="{{ data.field1 }}" readonly>
+            </div>
+            <div class="form-column">
+                <label for="field2">Ancho de la Cámara en (m):</label>
+                <input type="text" id="field2" name="field2" value="{{ data.field2 }}" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-column">
+                <label for="field3">Alto de la Cámara en (m):</label>
+                <input type="text" id="field3" name="field3" value="{{ data.field3 }}" readonly>
+            </div>
+            <div class="form-column">
+                <label for="field4">Temperatura de entrada en (°C):</label>
+                <input type="text" id="field4" name="field4" value="{{ data.field4 }}" readonly>
+            </div>
+        </div>
+        <!-- Añadir más campos aquí en el mismo formato -->
+
+        <button class="btn-return" onclick="window.location.href='{{ url_for('return_to_form', id=data['field_new']) }}'">Retornar</button>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

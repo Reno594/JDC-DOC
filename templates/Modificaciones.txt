@@ -72,7 +72,7 @@
             const result = await response.text();
             console.log('Respuesta del servidor:', result); // Depuración en el cliente
             if (response.ok) {
-                window.location.href = `/results/${formData.get('field_new')}`;
+                window.location.href = `/results/${formData.get('field_cliente')}/${formData.get('field_new')}`;
             } else {
                 alert('Error al enviar los datos');
             }
@@ -103,18 +103,25 @@
         }
 
         async function fetchFiles() {
-            const response = await fetch('/files');
-            const files = await response.json();
-            const fileSelect = document.getElementById('fileSelect');
-            files.forEach(file => {
-                const option = document.createElement('option');
-                option.value = file;
-                option.text = file;
-                fileSelect.appendChild(option);
-            });
+            const cliente = document.getElementById('field_cliente').value;
+            if (cliente) {
+                const response = await fetch(`/files/${cliente}`);
+                const files = await response.json();
+                const fileSelect = document.getElementById('fileSelect');
+                fileSelect.innerHTML = ''; // Limpiar el selector
+                files.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file;
+                    option.text = file;
+                    fileSelect.appendChild(option);
+                });
+            }
         }
 
-        window.onload = fetchFiles;
+        window.onload = function() {
+            document.getElementById('field_cliente').addEventListener('input', fetchFiles);
+            fetchFiles();
+        };
     </script>
 </head>
 <body>
@@ -143,14 +150,14 @@
             </div>
             <div class="form-row">
                 <div class="form-column">
-                    <label for="field_new">Nuevo Identificador (field_new):</label>
-                    <input type="text" id="field_new" name="field_new" value="{{ data.get('field_new', '') }}" required>
+                    <label for="field_cliente">Cliente:</label>
+                    <input type="text" id="field_cliente" name="field_cliente" value="{{ data.get('field_cliente', '') }}" required>
                 </div>
             </div>
-			<div class="form-row">
+            <div class="form-row">
                 <div class="form-column">
-                    <label for="field_new">Cliente:</label>
-                    <input type="text" id="field_cliente" name="field_cliente" value="{{ data.get('field_cliente', '') }}" required>
+                    <label for="field_new">Nuevo Identificador (field_new):</label>
+                    <input type="text" id="field_new" name="field_new" value="" required>
                 </div>
             </div>
             <div class="form-row">
@@ -160,7 +167,7 @@
                     <button type="button" onclick="handleLoadFile()">Cargar Archivo</button>
                 </div>
                 <div class="form-column">
-                    <label for="fileSelect">Carpeta de Ciente:</label>
+                    <label for="fileSelect">Carpeta de Cliente:</label>
                     <select id="fileSelect" onchange="handleLoadFile()"></select>
                 </div>
             </div>
@@ -169,15 +176,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
