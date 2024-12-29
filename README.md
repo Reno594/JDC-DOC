@@ -1,3 +1,3 @@
 # JDC-DOC
-# SistCool Asistencia Técnica
+# AsisCool Asistencia Técnica
 Ingeniería y mantenimiento de sistemas de refrigeración Industrial
